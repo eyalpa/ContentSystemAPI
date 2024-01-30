@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "moduleResolution": "node" ,
+    "strict": true,
+    "esModuleInterop": true,
+    "typeRoots": ["./src/types", "./node_modules/@types"]  // it's important to put first your path file otherwise it won't work
+  },
+  "include": ["src/**/*.ts"],
+  //"exclude": ["node_modules"]
+}
