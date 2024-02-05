@@ -1,17 +1,3 @@
-export const calculateRelevanceScore = (post: any, userCountry: any) => {
-    // Constants for weighting
-    const LIKE_WEIGHT = 0.8;
-    const LENGTH_WEIGHT = 0.2;
-
-    // Additional priority for posts from the same country
-    const countryPriority = post.author.country === userCountry ? 1000 : 0;
-
-    // Calculating the weighted score
-    const likeScore = post.likes * LIKE_WEIGHT;
-    const lengthScore = post.body.length * LENGTH_WEIGHT; // Assuming 'body' is a string
-
-    return countryPriority + likeScore + lengthScore;
-};
 export const generateSummary = (body: string): string => {
     // Define the maximum number of words
     const maxWords = 100;

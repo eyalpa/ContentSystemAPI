@@ -1,3 +1,4 @@
+import { Status } from '../../enums/posts/status';
 import { Post } from '../../models/postModel';
 import { IUser } from '../../models/userModel'; // Import the user interface
 
@@ -9,7 +10,7 @@ export const createPost = async (postData: any, user: IUser) => {
     const newPost = new Post({
         ...postData,
         author: user._id,
-        status: 'Pending approval'
+        status: Status.PendingApproval
     });
 
     await newPost.save();

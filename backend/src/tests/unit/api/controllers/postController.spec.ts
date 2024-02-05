@@ -3,6 +3,7 @@ import * as sinon from 'sinon';
 import { createPost, getFeed } from "../../../../api/controllers/postController";
 import { Post } from "../../../../models/postModel";
 import { User } from "../../../../models/userModel";
+import { Status } from '../../../../enums/posts/status';
 
 describe('code snippet', () => {
 
@@ -31,7 +32,7 @@ describe('code snippet', () => {
         body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc id aliquam tincidunt, nisl nunc lacinia nunc, vitae tincidunt nisl mauris id nunc. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi.',
         author: 'user1',
         community: 'community1',
-        status: 'Pending approval'
+        status: Status.PendingApproval
       };
   
       // Stub the necessary functions
@@ -76,7 +77,7 @@ describe('code snippet', () => {
         body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         author: 'user1',
         community: 'community1',
-        status: 'Pending approval'
+        status: Status.PendingApproval
       };
   
       // Stub the necessary functions
@@ -136,7 +137,7 @@ describe('code snippet', () => {
       sinon.assert.calledWith(findByIdStub, 'user1');
       sinon.assert.calledWith(findStub, {
         community: { $in: ['community1'] },
-        status: 'Approved'
+        status: Status.Approved
       });
       sinon.assert.calledWith(res.status, 200);
       sinon.assert.calledWith(res.json, [

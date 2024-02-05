@@ -7,3 +7,4 @@ export interface IUser {
     country: string;
     // ... any other user properties
 }
+

@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { User } from '../../models/userModel';
-import { CommunityController } from './communityController';
 
 export const createUser = async (req: Request, res: Response) => {
     try {

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Status } from '../enums/posts/status';
 
 const postSchema = new mongoose.Schema({
   title: { type: String, required: true, maxlength: 60 },
@@ -7,7 +8,7 @@ const postSchema = new mongoose.Schema({
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   community: { type: mongoose.Schema.Types.ObjectId, ref: 'Community' },
   likes: { type: Number, default: 0 },
-  status: { type: String, enum: ['Pending approval', 'Approved'], default: 'Pending approval' },
+  status: { type: String, enum: [Status.Approved, Status.PendingApproval], default: Status.PendingApproval },
   createdAt: {
     type: Date,
     default: Date.now // This sets the default value to the current date and time
