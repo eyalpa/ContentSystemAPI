@@ -5,6 +5,7 @@ export interface IUser {
     email: string;
     role:string;
     country: string;
+    communities: string[]
     // ... any other user properties
 }
 

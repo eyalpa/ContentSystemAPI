@@ -12,6 +12,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         email: 'john@example.com',
         role: 'super moderator',
         country: 'Israel',
+        communities: []
         // ... other user properties
     };
     
