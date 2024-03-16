@@ -1,7 +1,6 @@
 import { Response, NextFunction, Request } from "express";
 import jwt from "jsonwebtoken";
-import { IUser } from "../../interfaces/IUser";
-import { User } from "../../models/userModel"; // Adjust the import path as necessary
+import { User, IUser } from "../../models/userModel"; // Adjust the import path as necessary
 
 // This assumes you have an environment variable for your secret key
 const SECRET_KEY = process.env.JWT_SECRET_KEY || "your_secret_key_here";
