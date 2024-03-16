@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import bodyParser from "body-parser";
-
+import cors from "cors";
 import MongoDBConnector from "./dal/MongoDBConnector";
 import postRoutes from "./api/routes/postRoutes";
 import userRoutes from "./api/routes/userRoutes";
@@ -13,9 +13,13 @@ const app: Application = express();
 
 // Initialize the MongoDB connector
 const dbConnector = MongoDBConnector.getInstance();
-
+app.use(cors({
+  methods:["GET","POST","PATCH"],
+  allowedHeaders: ["Content-Type","Authorization"]
+}))
 // Middlewares
 app.use(bodyParser.json());
+app.use(express.urlencoded({extended:true}));
 app.use("/api/auth", authRoutes);
 app.use(authMiddleware);
 
