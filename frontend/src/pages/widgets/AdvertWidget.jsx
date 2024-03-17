@@ -1,7 +1,7 @@
-import { Typography, useTheme } from '@mui/material';
-import React from 'react';
-import FlexBetween from '../../components/FlexBetween';
-import WidgetWrapper from '../../components/WidgetWrapper';
+import { Typography, useTheme } from "@mui/material";
+import React from "react";
+import FlexBetween from "../../components/FlexBetween";
+import WidgetWrapper from "../../components/WidgetWrapper";
 
 function AdvertWidget() {
   const { palette } = useTheme();
@@ -21,8 +21,8 @@ function AdvertWidget() {
         width="100%"
         height="auto"
         alt="advertisement"
-        src="http://localhost:6001/assets/info4.jpeg"
-        style={{ borderRadius: '0.75rem', margin: '0.75rem 0' }}
+        src="http://192.168.68.122:6001/api/users/assets/info4.jpeg"
+        style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
       />
       <FlexBetween>
         <Typography color={main}>MikaCosmetics</Typography>

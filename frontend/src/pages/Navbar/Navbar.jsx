@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   IconButton,
@@ -9,7 +9,7 @@ import {
   FormControl,
   useTheme,
   useMediaQuery,
-} from '@mui/material';
+} from "@mui/material";
 
 import {
   Search,
@@ -20,18 +20,18 @@ import {
   Help,
   Menu,
   Close,
-} from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import FlexBetween from '../../components/FlexBetween';
-import { authActions } from '../../store/authSlice';
+} from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import FlexBetween from "../../components/FlexBetween";
+import { authActions } from "../../store/authSlice";
 
 function Navbar() {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  const isNonMobileScreens = useMediaQuery('(min-width: 1000px');
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px");
 
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
@@ -49,11 +49,11 @@ function Navbar() {
           fontWeight="bold"
           fontSize="clamp(1rem, 2rem, 2.25rem)"
           color="primary"
-          onClick={() => navigate('/home')}
+          onClick={() => navigate("/home")}
           sx={{
-            '&:hover': {
+            "&:hover": {
               color: primaryLight,
-              cursor: 'pointer',
+              cursor: "pointer",
             },
           }}
         >
@@ -79,28 +79,28 @@ function Navbar() {
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton onClick={() => dispatch(authActions.setMode())}>
-            {theme.palette.mode === 'dark' ? (
-              <DarkMode sx={{ fontSize: '25px' }} />
+            {theme.palette.mode === "dark" ? (
+              <DarkMode sx={{ fontSize: "25px" }} />
             ) : (
-              <LightMode sx={{ color: dark, fontSize: '25px' }} />
+              <LightMode sx={{ color: dark, fontSize: "25px" }} />
             )}
           </IconButton>
-          <Message sx={{ fontSize: '25px' }} />
-          <Notifications sx={{ fontSize: '25px' }} />
-          <Help sx={{ fontSize: '25px' }} />
+          <Message sx={{ fontSize: "25px" }} />
+          <Notifications sx={{ fontSize: "25px" }} />
+          <Help sx={{ fontSize: "25px" }} />
           <FormControl variant="standard" value={fullName}>
             <Select
               value={fullName}
               sx={{
                 backgroundColor: neutralLight,
-                width: '150px',
-                borderRadius: '0.25rem',
-                padding: '0.25rem 1rem',
-                '& .MuiSvgIcon-root': {
-                  pr: '0.25rem',
-                  width: '3rem',
+                width: "150px",
+                borderRadius: "0.25rem",
+                padding: "0.25rem 1rem",
+                "& .MuiSvgIcon-root": {
+                  pr: "0.25rem",
+                  width: "3rem",
                 },
-                '& .MuiSelect-select:focus': {
+                "& .MuiSelect-select:focus": {
                   backgroundColor: neutralLight,
                 },
               }}
@@ -148,30 +148,30 @@ function Navbar() {
           >
             <IconButton
               onClick={() => dispatch(authActions.setMode())}
-              sx={{ fontSize: '25px' }}
+              sx={{ fontSize: "25px" }}
             >
-              {theme.palette.mode === 'dark' ? (
-                <DarkMode sx={{ fontSize: '25px' }} />
+              {theme.palette.mode === "dark" ? (
+                <DarkMode sx={{ fontSize: "25px" }} />
               ) : (
-                <LightMode sx={{ color: dark, fontSize: '25px' }} />
+                <LightMode sx={{ color: dark, fontSize: "25px" }} />
               )}
             </IconButton>
-            <Message sx={{ fontSize: '25px' }} />
-            <Notifications sx={{ fontSize: '25px' }} />
-            <Help sx={{ fontSize: '25px' }} />
+            <Message sx={{ fontSize: "25px" }} />
+            <Notifications sx={{ fontSize: "25px" }} />
+            <Help sx={{ fontSize: "25px" }} />
             <FormControl variant="standard" value={fullName}>
               <Select
                 value={fullName}
                 sx={{
                   backgroundColor: neutralLight,
-                  width: '150px',
-                  borderRadius: '0.25rem',
-                  padding: '0.25rem 1rem',
-                  '& .MuiSvgIcon-root': {
-                    pr: '0.25rem',
-                    width: '3rem',
+                  width: "150px",
+                  borderRadius: "0.25rem",
+                  padding: "0.25rem 1rem",
+                  "& .MuiSvgIcon-root": {
+                    pr: "0.25rem",
+                    width: "3rem",
                   },
-                  '& .MuiSelect-select:focus': {
+                  "& .MuiSelect-select:focus": {
                     backgroundColor: neutralLight,
                   },
                 }}

@@ -12,6 +12,7 @@ module.exports = {
   plugins: ["react"],
   rules: {
     "linebreak-style": 0,
+    quotes: ["error", "double"],
     "no-underscore-dangle": ["error", { allow: ["_id"] }],
   },
 };

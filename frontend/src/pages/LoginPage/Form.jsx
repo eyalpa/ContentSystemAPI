@@ -22,8 +22,7 @@ const registerSchema = yup.object().shape({
   lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
-  location: yup.string().required("required"),
-  occupation: yup.string().required("required"),
+  country: yup.string().required("required"),
   picture: yup.string().required("required"),
 });
 
@@ -37,8 +36,7 @@ const initialValuesRegister = {
   lastName: "",
   email: "",
   password: "",
-  location: "",
-  occupation: "",
+  country: "",
   picture: "",
 };
 
@@ -63,14 +61,15 @@ function Form() {
     for (const value in values) {
       formData.append(value, values[value]);
     }
-    formData.append("picture", values.picture.name);
+    // formData.append("picture", values.picture)
     console.log(formData);
     const savedUserResponse = await fetch(
-      "http://localhost:6001/api/auth/register",
+      "http://192.168.68.122:6001/api/auth/register",
       {
         method: "POST",
+        mode: "cors",
         body: formData,
-      }
+      },
     );
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
@@ -83,18 +82,19 @@ function Form() {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch(
-      "http://localhost:6001/api/auth/login",
+      "http://192.168.68.122:6001/api/auth/login",
       {
         method: "POST",
+        mode: "cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
-      }
+      },
     );
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     if (loggedIn) {
       dispatch(
-        authActions.setLogin({ user: loggedIn.user, token: loggedIn.token })
+        authActions.setLogin({ user: loggedIn.user, token: loggedIn.token }),
       );
       navigate("/home");
     }
@@ -155,25 +155,13 @@ function Form() {
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
-                  label="Location"
+                  label="Country"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.location}
-                  name="location"
-                  error={Boolean(touched.location) && Boolean(errors.location)}
-                  helperText={touched.location && errors.location}
-                  sx={{ gridColumn: "span 4" }}
-                />
-                <TextField
-                  label="Occupation"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.occupation}
-                  name="occupation"
-                  error={
-                    Boolean(touched.occupation) && Boolean(errors.occupation)
-                  }
-                  helperText={touched.occupation && errors.occupation}
+                  value={values.country}
+                  name="country"
+                  error={Boolean(touched.location) && Boolean(errors.country)}
+                  helperText={touched.country && errors.country}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <Box
@@ -185,9 +173,7 @@ function Form() {
                   <Dropzone
                     acceptedFiles=".jpg, .jpeg, .png"
                     multiple={false}
-                    onDrop={(acceptedFiles) =>
-                      setFieldValue("picture", acceptedFiles[0])
-                    }
+                    onDrop={(acceptedFiles) => setFieldValue("picture", acceptedFiles[0])}
                   >
                     {({ getRootProps, getInputProps }) => (
                       <Box

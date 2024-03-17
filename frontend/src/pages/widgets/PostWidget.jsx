@@ -1,125 +1,64 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
+import React from "react";
 import {
-  ChatBubbleOutlineOutlined,
+  IconButton, Typography, useTheme,
+} from "@mui/material";
+import {
   FavoriteBorderOutlined,
   FavoriteOutlined,
-  ShareOutlined,
-} from '@mui/icons-material';
-import {
-  Box, Divider, IconButton, Typography, useTheme,
-} from '@mui/material';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import FlexBetween from '../../components/FlexBetween';
-import Friend from '../../components/Friend';
-import WidgetWrapper from '../../components/WidgetWrapper';
-import { authActions } from '../../store/authSlice';
+} from "@mui/icons-material";
+import WidgetWrapper from "../../components/WidgetWrapper";
 
 function PostWidget({
-  postId,
-  postUserId,
-  name,
-  description,
-  location,
-  picturePath,
-  userPicturePath,
+  community, // Assuming community details are passed
+  body,
+  title,
+  summary,
+  author, // Assuming author details are passed
   likes,
-  comments,
+  createdAt,
 }) {
-  const [isComments, setIsComments] = useState(false);
-  const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
-  const loggedInUserId = useSelector((state) => state.user._id);
-  const isLiked = Boolean(likes[loggedInUserId]);
-  const likeCount = Object.keys(likes).length;
-
+  const [isLiked, setIsLiked] = React.useState(false); // Simplified like handling
+  // eslint-disable-next-line no-unused-vars
   const { palette } = useTheme();
-  const { main } = palette.neutral;
-  const primary = palette.primary.main;
 
-  const patchLike = async () => {
-    const response = await fetch(`http://localhost:6001/api/posts/${postId}/like`, {
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId: loggedInUserId }),
-    });
-    const updatedPost = await response.json();
-    dispatch(authActions.setPost({ post: updatedPost }));
+  const toggleLike = async () => {
+    // Simplified like toggle logic
+    setIsLiked(!isLiked);
+    // Implement the like API call and dispatch here
   };
 
   return (
     <WidgetWrapper m="2rem 0">
-      <Friend
-        friendId={postUserId}
-        name={name}
-        subtitle={location}
-        userPicturePath={userPicturePath}
-      />
-      <Typography color={main} sx={{ mt: '1rem' }}>
-        {description}
+      {/* Community and Author information rendering assumed. Adjust based on actual data structure. */}
+      <Typography variant="h6">
+        {author.name}
+        {" "}
+        -
+        {" "}
+        {community.title}
       </Typography>
-      {picturePath && (
-        <img
-          width="100%"
-          height="auto"
-          alt="post"
-          style={{
-            borderRadius: '0.75rem',
-            marginTop: '0.75rem',
-          }}
-          src={`http://localhost:6001/assets/${picturePath}`}
-        />
-      )}
-      <FlexBetween mt="0.25rem">
-        <FlexBetween gap="1rem">
-
-          <FlexBetween gap="0.3rem">
-            <IconButton onClick={patchLike}>
-              {isLiked ? (
-                <FavoriteOutlined sx={{ color: primary }} />
-              ) : (
-                <FavoriteBorderOutlined />
-              )}
-            </IconButton>
-            <Typography>{likeCount}</Typography>
-          </FlexBetween>
-
-          <FlexBetween gap="0.3rem">
-            <IconButton onClick={() => setIsComments(!isComments)}>
-              <ChatBubbleOutlineOutlined />
-            </IconButton>
-            <Typography>{comments.length}</Typography>
-          </FlexBetween>
-
-        </FlexBetween>
-
-        <IconButton>
-          <ShareOutlined />
-        </IconButton>
-
-      </FlexBetween>
-      { isComments && (
-        <Box mt="0.5rem">
-          {comments.map((comment, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Box key={`${name}-${index}`}>
-              <Divider />
-              <Typography sx={{
-                color: main,
-                m: '0.5rem 0',
-                pl: '1rem',
-              }}
-              >
-                {comment}
-              </Typography>
-            </Box>
-          ))}
-          <Divider />
-        </Box>
-      )}
+      <Typography variant="h2">
+        {" "}
+        { title }
+      </Typography>
+      <Typography variant="h2">
+        {" "}
+        { summary }
+      </Typography>
+      <Typography variant="h2">
+        {" "}
+        { body }
+      </Typography>
+      <Typography color="textSecondary" sx={{ mb: "1rem" }}>{createdAt.toLocaleString()}</Typography>
+      {/* Assume body content is passed as `description` */}
+      {/* Rendering of the post's content, status, and interactions */}
+      <IconButton onClick={toggleLike}>
+        {isLiked ? <FavoriteOutlined color="secondary" /> : <FavoriteBorderOutlined />}
+      </IconButton>
+      <Typography>{likes}</Typography>
+      {/* Additional interactions and content here */}
     </WidgetWrapper>
   );
 }

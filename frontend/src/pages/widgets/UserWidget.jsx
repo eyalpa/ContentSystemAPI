@@ -1,19 +1,18 @@
 /* eslint-disable react/prop-types */
 import {
   ManageAccountsOutlined,
-  EditOutlined,
   LocationOnOutlined,
   WorkOutlineOutlined,
-} from '@mui/icons-material';
+} from "@mui/icons-material";
 import {
   Box, Typography, Divider, useTheme,
-} from '@mui/material';
-import { useSelector } from 'react-redux';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import UserImage from '../../components/UserImage';
-import FlexBetween from '../../components/FlexBetween';
-import WidgetWrapper from '../../components/WidgetWrapper';
+} from "@mui/material";
+import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import UserImage from "../../components/UserImage";
+import FlexBetween from "../../components/FlexBetween";
+import WidgetWrapper from "../../components/WidgetWrapper";
 
 const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
@@ -25,10 +24,14 @@ const UserWidget = ({ userId, picturePath }) => {
   const { main } = palette.neutral;
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:6001/api/users/${userId}`, {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `http://192.168.68.122:6001/api/users/${userId}`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
     const data = await response.json();
     setUser(data);
   };
@@ -48,7 +51,7 @@ const UserWidget = ({ userId, picturePath }) => {
     occupation,
     viewedProfile,
     impressions,
-    friends,
+    communities,
   } = user;
 
   return (
@@ -67,20 +70,20 @@ const UserWidget = ({ userId, picturePath }) => {
               color={dark}
               fontWeight="500"
               sx={{
-                '&:hover': {
+                "&:hover": {
                   color: palette.primary.light,
-                  curson: 'pointer',
+                  curson: "pointer",
                 },
               }}
             >
               {firstName}
-              {' '}
+              {" "}
               {lastName}
             </Typography>
             <Typography color={medium}>
-              {friends.length}
-              {' '}
-              friends
+              {communities.length}
+              {" "}
+              communities
             </Typography>
           </Box>
         </FlexBetween>
@@ -107,48 +110,19 @@ const UserWidget = ({ userId, picturePath }) => {
       <Box p="1rem 0">
         <FlexBetween mb="0.5rem">
           <Typography color={medium}>Who&apos;s viewed your profile</Typography>
-          <Typography color={medium} fontWeight="500">{viewedProfile}</Typography>
+          <Typography color={medium} fontWeight="500">
+            {viewedProfile}
+          </Typography>
         </FlexBetween>
         <FlexBetween>
           <Typography color={medium}>Impressions of your post</Typography>
-          <Typography color={medium} fontWeight="500">{impressions}</Typography>
+          <Typography color={medium} fontWeight="500">
+            {impressions}
+          </Typography>
         </FlexBetween>
       </Box>
 
       <Divider />
-
-      {/* Fourth row */}
-      <Box p="1rem 0">
-        <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
-          Social Profiles
-        </Typography>
-        <FlexBetween gap="1rem" mb="0.5rem">
-          <FlexBetween gap="1rem">
-            <img src="../assets/twitter.png" alt="twitter" />
-            <Box>
-              <Typography color={main} fontWeight="500">
-                Twitter
-              </Typography>
-              <Typography color={medium}>Social Network</Typography>
-            </Box>
-          </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
-        </FlexBetween>
-
-        <FlexBetween gap="1rem">
-          <FlexBetween gap="1rem">
-            <img src="../assets/linkedin.png" alt="linkedin" />
-            <Box>
-              <Typography color={main} fontWeight="500">
-                Linkedin
-              </Typography>
-              <Typography color={medium}>Network Platform</Typography>
-            </Box>
-          </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
-        </FlexBetween>
-
-      </Box>
 
     </WidgetWrapper>
   );

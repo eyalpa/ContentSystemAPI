@@ -1,19 +1,19 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  mode: 'light',
+  mode: "light",
   user: null,
   token: null,
   posts: [],
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     setMode: (state) => {
-      state.mode = state.mode === 'light' ? 'dark' : 'light';
+      state.mode = state.mode === "light" ? "dark" : "light";
     },
     setLogin: (state, action) => {
       state.user = action.payload.user;
@@ -23,11 +23,11 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
     },
-    setFriends: (state, action) => {
+    setcommunities: (state, action) => {
       if (state.user) {
-        state.user.friends = action.payload.friends;
+        state.user.communities = action.payload.communities;
       } else {
-        console.error('user friends non-existent :(');
+        console.error("user communities non-existent :(");
       }
     },
     setPosts: (state, action) => {
