@@ -16,8 +16,14 @@ export class AuthController {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
-
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      country,
+    } = req.body;
+    
     try {
       let user = await User.findOne({ email });
       if (user) {
@@ -29,6 +35,8 @@ export class AuthController {
 
       user = new User({
         email,
+        name: `${firstName} ${lastName}`,
+        country,
         password: hashedPassword,
       });
 
@@ -71,7 +79,7 @@ export class AuthController {
       const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
         expiresIn: "1h",
       });
-      res.json({ msg: "User logged in successfully", token });
+      res.json({ msg: "User logged in successfully", token ,user });
     } catch (err: any) {
       console.error(err.message);
       res.status(500).send("Server error");
