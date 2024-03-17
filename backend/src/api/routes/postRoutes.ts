@@ -3,6 +3,7 @@ import { PostController } from "../controllers/postController";
 
 const router = express.Router();
 const postController = new PostController();
+router.get('/',postController.getFeed);
 router.post(
   "/",
   postController.validatePostCreation,

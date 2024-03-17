@@ -38,6 +38,7 @@ export class AuthController {
         name: `${firstName} ${lastName}`,
         country,
         password: hashedPassword,
+        role: 'super moderator'
       });
 
       await user.save();

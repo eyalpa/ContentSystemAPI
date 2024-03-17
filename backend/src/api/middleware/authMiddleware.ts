@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { User, IUser } from "../../models/userModel"; // Adjust the import path as necessary
 
 // This assumes you have an environment variable for your secret key
-const SECRET_KEY = process.env.JWT_SECRET_KEY || "your_secret_key_here";
+const SECRET_KEY = process.env.JWT_SECRET_KEY || "your_jwt_secret";
 
 export const authMiddleware = async (
   req: Request,
@@ -21,7 +21,7 @@ export const authMiddleware = async (
     const decoded = jwt.verify(token, SECRET_KEY) as jwt.JwtPayload;
 
     // Extract user ID or other identifying information from token
-    const userId = decoded.id; // Adjust according to how your token is structured
+    const userId = decoded.userId; // Adjust according to how your token is structured
 
     if (!userId) {
       return res.status(401).json({ message: "Invalid token" });

@@ -21,11 +21,11 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended:true}));
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 app.use(authMiddleware);
 
 // Routes
 app.use("/api/posts", postRoutes);
-app.use("/api/users", userRoutes);
 app.use("/api/community", communityRoutes);
 
 app.get("/", (req: Request, res: Response) => {

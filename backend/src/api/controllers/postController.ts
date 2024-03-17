@@ -127,6 +127,22 @@ export class PostController {
           },
         },
         {
+          $lookup: {
+            from: "users",
+            localField: "author",
+            foreignField: "_id",
+            as: "authorDetails"
+          }
+        },
+        {
+          $lookup: {
+            from: "communities",
+            localField: "community",
+            foreignField: "_id",
+            as: "communityDetails"
+          }
+        },
+        {
           $addFields: {
             likeScore: {
               $multiply: [
@@ -159,7 +175,8 @@ export class PostController {
           $project: {
             title: 1,
             summary: 1,
-            author: 1,
+            authorDetails: 1,
+            communityDetails:1,
             createdAt: 1,
           },
         },
