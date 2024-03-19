@@ -1,4 +1,4 @@
-import winston, { LogEntry } from "winston";
+/*import winston, { LogEntry } from "winston";
 import { ElasticsearchTransport } from "winston-elasticsearch";
 import { Client } from "@elastic/elasticsearch";
 import dotenv from 'dotenv';
@@ -39,3 +39,4 @@ const logger = winston.createLogger({
 });
 
 export default logger;
+*/

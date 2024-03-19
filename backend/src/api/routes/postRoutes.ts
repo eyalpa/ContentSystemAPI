@@ -1,11 +1,15 @@
-import express from 'express';
-import { approvePost, createPost, getFeed } from '../controllers/postController';
-import { validatePostCreation } from '../controllers/postController';
+import express from "express";
+import { PostController } from "../controllers/postController";
 
 const router = express.Router();
-
-router.post('/',validatePostCreation, createPost);
-router.put('/approve/:postId', approvePost);
-router.get('/feed', getFeed);
+const postController = new PostController();
+router.get('/',postController.getFeed);
+router.post(
+  "/",
+  postController.validatePostCreation,
+  postController.createPost
+);
+router.put("/approve/:postId", postController.approvePost);
+router.get("/feed", postController.getFeed);
 
 export default router;
