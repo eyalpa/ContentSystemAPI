@@ -2,7 +2,6 @@
 import {
   ManageAccountsOutlined,
   LocationOnOutlined,
-  WorkOutlineOutlined,
 } from "@mui/icons-material";
 import {
   Box, Typography, Divider, useTheme,
@@ -45,10 +44,8 @@ const UserWidget = ({ userId, picturePath }) => {
   }
 
   const {
-    firstName,
-    lastName,
-    location,
-    occupation,
+    name,
+    country,
     viewedProfile,
     impressions,
     communities,
@@ -76,9 +73,7 @@ const UserWidget = ({ userId, picturePath }) => {
                 },
               }}
             >
-              {firstName}
-              {" "}
-              {lastName}
+              {name}
             </Typography>
             <Typography color={medium}>
               {communities.length}
@@ -96,11 +91,7 @@ const UserWidget = ({ userId, picturePath }) => {
       <Box p="1rem 0">
         <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
           <LocationOnOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>{location}</Typography>
-        </Box>
-        <Box display="flex" alignItems="center" gap="1rem">
-          <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>{occupation}</Typography>
+          <Typography color={medium}>{country}</Typography>
         </Box>
       </Box>
 

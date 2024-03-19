@@ -30,7 +30,7 @@ function HomePage() {
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <MyPostWidget picturePath={picturePath} />
+          <MyPostWidget />
           <PostsWidget loggedInUserId={_id} />
         </Box>
         {isNonMobileScreens && (

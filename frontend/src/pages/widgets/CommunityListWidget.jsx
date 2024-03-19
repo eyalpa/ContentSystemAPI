@@ -10,7 +10,7 @@ function CommunityListWidget() {
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const token = useSelector((state) => state.token);
-  const { communities } = useSelector((state) => state.user);
+  const { allcommunities } = useSelector((state) => state.user);
 
   const getcommunities = async () => {
     const response = await fetch(
@@ -22,7 +22,7 @@ function CommunityListWidget() {
       },
     );
     const data = await response.json();
-    dispatch(authActions.setcommunities({ communities: data }));
+    dispatch(authActions.setGlobalCommunities({ communities: data }));
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function CommunityListWidget() {
         Community List
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
-        {communities.map((community) => (
+        {allcommunities.map((community) => (
           <Community
             key={community._id}
             CommunityId={community._id}

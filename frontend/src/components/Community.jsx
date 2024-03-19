@@ -18,9 +18,8 @@ function Community({
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const { communities } = useSelector((state) => state.user);
+  const allcommunities = useSelector((state) => state.communities) || [];
 
   const { palette } = useTheme();
   const primaryLight = palette.primary.light;
@@ -28,11 +27,12 @@ function Community({
   const { main } = palette.neutral;
   const { medium } = palette.neutral;
 
-  const isCommunity = communities.find((community) => community._id === CommunityId);
+  const isCommunity = allcommunities.find((community) => community._id
+   && community._id === CommunityId);
 
   const patchCommunity = async () => {
     const response = await fetch(
-      `http://192.168.68.122:6001/api/users/${_id}/${CommunityId}`,
+      `http://192.168.68.122:6001/api/users/${CommunityId}`,
       {
         method: "PATCH",
         mode: "cors",
@@ -43,7 +43,7 @@ function Community({
       },
     );
     const data = await response.json();
-    dispatch(authActions.setcommunities({ communities: data }));
+    dispatch(authActions.setcommunities({ communities: data.communities }));
   };
 
   return (

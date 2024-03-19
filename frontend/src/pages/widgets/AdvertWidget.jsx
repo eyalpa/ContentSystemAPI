@@ -21,7 +21,7 @@ function AdvertWidget() {
         width="100%"
         height="auto"
         alt="advertisement"
-        src="http://192.168.68.122:6001/api/users/assets/info4.jpeg"
+        src="http://192.168.68.122:6001/api/auth/assets/info4.jpeg"
         style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
       />
       <FlexBetween>

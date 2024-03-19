@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   mode: "light",
   user: null,
+  communities: [],
   token: null,
   posts: [],
 };
@@ -26,6 +27,13 @@ const authSlice = createSlice({
     setcommunities: (state, action) => {
       if (state.user) {
         state.user.communities = action.payload.communities;
+      } else {
+        console.error("user communities non-existent :(");
+      }
+    },
+    setGlobalCommunities: (state, action) => {
+      if (state.communities) {
+        state.communities = action.payload.communities;
       } else {
         console.error("user communities non-existent :(");
       }
