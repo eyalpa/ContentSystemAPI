@@ -17,7 +17,7 @@ function MyPostWidget() {
   const [post, setPost] = useState("");
   const [title, setTitle] = useState("");
   const allCommunities = useSelector((state) => state.communities);
-  const { communities: userCommunities } = useSelector((state) => state.user);
+  const userCommunities = useSelector((state) => state.userCommunities);
   const [communities, setCommunities] = useState([]);
   useEffect(() => {
     if (allCommunities) {
@@ -26,7 +26,7 @@ function MyPostWidget() {
         setCommunities(filteredCommunities);
       }
     }
-  }, [allCommunities, communities]);
+  }, [allCommunities, communities, userCommunities]);
 
   const [selectedCommunity, setSelectedCommunity] = useState("");
   const { palette } = useTheme();

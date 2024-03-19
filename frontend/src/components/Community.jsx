@@ -5,7 +5,6 @@ import {
   Box, IconButton, Typography, useTheme,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 import { authActions } from "../store/authSlice";
@@ -17,7 +16,6 @@ function Community({
   image,
 }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const allcommunities = useSelector((state) => state.communities) || [];
 
@@ -50,12 +48,7 @@ function Community({
     <FlexBetween>
       <FlexBetween gap="1rem">
         <UserImage image={image} size="55px" />
-        <Box
-          onClick={() => {
-            navigate(`/profile/${CommunityId}`);
-            navigate(0);
-          }}
-        >
+        <Box>
           <Typography
             color={main}
             variant="h5"
