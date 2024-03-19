@@ -8,5 +8,5 @@ const authController = new AuthController();
 
 router.post("/register",upload.single('picture'), authController.userRegistration);
 router.post("/login", authController.userLogin);
-
+router.get('/assets/:name',authController.getImage)
 export default router;

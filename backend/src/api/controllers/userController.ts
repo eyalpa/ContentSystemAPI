@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { User } from '../../models/userModel';
-import path from 'path';
-import fs from 'fs';
+
 
 export const createUser = async (req: Request, res: Response) => {
     try {
@@ -27,21 +26,33 @@ export const getUser = async (req: Request, res: Response) => {
         res.status(500).json({ message: error.message });
     }
 };
-export const getImage = async (req: Request, res: Response) => {
+export const patchUserCommunity = async (req: Request, res: Response) => {
     try {
-        const assetsDirectory = path.join(__dirname, '../../public/assets');
-          const fileName = req.params.name;
-          const filePath = path.join(assetsDirectory, fileName);
-        
-          // Check if the file exists before attempting to send it
-          if (fs.existsSync(filePath)) {
-            res.sendFile(filePath);
-          } else {
-            // If the file does not exist, send a 404 Not Found response
-            res.status(404).send('File not found');
-          }     
-    } catch (error: any ) {
-        console.error(error);
-        res.status(500).json({ message: error.message });
+        const userId = req.user?._id;
+        const communityId = req.params.communityId;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        const isMember = user.communities.map(x => x.toString()).includes(communityId);
+        if (isMember) {
+            // Remove the user from the community
+            user.communities = user.communities.filter(x => x.toString() !== communityId);
+            const retUser = await user.save();
+            res.send(retUser);
+        } else {
+            await User.findByIdAndUpdate(
+                userId,
+                { $push: { communities: communityId } }
+              );
+            const retUser = await user.save();
+            res.send(retUser);
+        }
+    } catch (error) {
+        console.error('Patch User Community Error:', error);
+        res.status(500).send('Internal server error');
     }
 };
+
+

@@ -21,8 +21,8 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended:true}));
 app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
 app.use(authMiddleware);
+app.use("/api/users", userRoutes);
 
 // Routes
 app.use("/api/posts", postRoutes);
