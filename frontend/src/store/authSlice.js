@@ -5,6 +5,7 @@ const initialState = {
   mode: "light",
   user: null,
   communities: [],
+  userCommunities: [],
   token: null,
   posts: [],
 };
@@ -18,6 +19,7 @@ const authSlice = createSlice({
     },
     setLogin: (state, action) => {
       state.user = action.payload.user;
+      state.userCommunities = action.payload.user.communities;
       state.token = action.payload.token;
     },
     setLogout: (state) => {
@@ -25,8 +27,8 @@ const authSlice = createSlice({
       state.token = null;
     },
     setcommunities: (state, action) => {
-      if (state.user) {
-        state.user.communities = action.payload.communities;
+      if (state.userCommunities) {
+        state.userCommunities = action.payload.communities;
       } else {
         console.error("user communities non-existent :(");
       }
