@@ -1,10 +1,11 @@
 import express from 'express';
-import { createUser, getUser ,getImage} from '../controllers/userController';
+import { createUser, getUser , patchUserCommunity} from '../controllers/userController';
 
 const router = express.Router();
 
 router.post('/', createUser);
 router.get('/:userId', getUser);
-router.get('/assets/:name',getImage)
+
+router.patch('/:communityId',patchUserCommunity);
 
 export default router;

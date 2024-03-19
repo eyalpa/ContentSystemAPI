@@ -4,7 +4,8 @@ import { User } from "../../models/userModel";
 import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import path from 'path';
+import fs from 'fs';
 // Assuming you have an environment variable for JWT secret
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
@@ -84,6 +85,26 @@ export class AuthController {
     } catch (err: any) {
       console.error(err.message);
       res.status(500).send("Server error");
+    }
+  };
+
+
+  public getImage = async (req: Request, res: Response) => {
+    try {
+        const assetsDirectory = path.join(__dirname, '../../public/assets');
+          const fileName = req.params.name;
+          const filePath = path.join(assetsDirectory, fileName);
+        
+          // Check if the file exists before attempting to send it
+          if (fs.existsSync(filePath)) {
+            res.sendFile(filePath);
+          } else {
+            // If the file does not exist, send a 404 Not Found response
+            res.status(404).send('File not found');
+          }     
+    } catch (error: any ) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
     }
   };
 }

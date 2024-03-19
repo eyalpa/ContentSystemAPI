@@ -65,7 +65,7 @@ export class PostController {
         body,
         author,
         community,
-        status: Status.PendingApproval,
+        status: Status.Approved,
       });
 
       await newPost.save();
