@@ -24,7 +24,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
   const getUser = async () => {
     const response = await fetch(
-      `http://192.168.68.122:6001/api/users/${userId}`,
+      `http://localhost:6001/api/users/${userId}`,
       {
         method: "GET",
         mode: "cors",

@@ -16,7 +16,7 @@ function CommunityListWidget() {
   const [newCommunity, setNewCommunity] = useState({ title: "", imageUrl: "", imageFile: null });
 
   const getcommunities = async () => {
-    const response = await fetch("http://192.168.68.122:6001/api/community", {
+    const response = await fetch("http://localhost:6001/api/community", {
       method: "GET",
       mode: "cors",
       headers: { Authorization: `Bearer ${token}` },
@@ -45,7 +45,7 @@ function CommunityListWidget() {
       return;
     }
 
-    const apiUrl = "http://192.168.68.122:6001/api/community/";
+    const apiUrl = "http://localhost:6001/api/community/";
 
     // Use FormData to prepare the data for sending
     const formData = new FormData();

@@ -32,7 +32,7 @@ function MyPostWidget() {
   const { palette } = useTheme();
   const token = useSelector((state) => state.token);
   const handlePost = async () => {
-    const response = await fetch("http://192.168.68.122:6001/api/posts", {
+    const response = await fetch("http://localhost:6001/api/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ function MyPostWidget() {
         <InputBase
           placeholder="Post Title"
           onChange={(e) => setTitle(e.target.value)}
-          value={post}
+          value={title}
           sx={{
             width: "100%",
             backgroundColor: palette.neutral.light,

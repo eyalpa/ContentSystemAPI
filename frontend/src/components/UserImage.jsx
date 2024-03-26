@@ -11,7 +11,7 @@ const UserImage = ({ image = "https://fastly.picsum.photos/id/1/200/300.jpg?hmac
       height={size}
       alt="user"
       // Use a ternary operator to check if `image` starts with "http"
-      src={image.startsWith("http") ? image : `http://192.168.68.122:6001/api/auth/assets/${image}`}
+      src={image.startsWith("http") ? image : `http://localhost:6001/api/auth/assets/${image}`}
     />
   </Box>
 );

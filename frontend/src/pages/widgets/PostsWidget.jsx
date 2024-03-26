@@ -8,7 +8,7 @@ function PostsWidget({ loggedInUserId, isProfile = false }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  // Assuming `posts` state structure matches the fetched data structure
+  const [intervalId, setIntervalId] = useState(null); // State to hold interval ID
   const posts = useSelector((state) => state.posts || []);
   const token = useSelector((state) => state.token);
 
@@ -17,9 +17,8 @@ function PostsWidget({ loggedInUserId, isProfile = false }) {
       setIsLoading(true);
       setError(null);
 
-      let url = "http://192.168.68.122:6001/api/posts/";
+      let url = "http://localhost:6001/api/posts/";
       if (isProfile) {
-        // Assuming your API supports fetching by userId
         url += `user/${loggedInUserId}`;
       }
 
@@ -42,7 +41,17 @@ function PostsWidget({ loggedInUserId, isProfile = false }) {
       }
     };
 
+    // Fetch posts initially
     fetchPosts();
+
+    // Set up interval to fetch posts periodically
+    const id = setInterval(fetchPosts, 60000); // Fetch every minute (adjust as needed)
+    setIntervalId(id);
+
+    // Clean up interval on component unmount
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [dispatch, isProfile, loggedInUserId, token]);
 
   if (isLoading) {

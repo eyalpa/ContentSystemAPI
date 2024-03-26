@@ -30,7 +30,7 @@ function Community({
 
   const patchCommunity = async () => {
     const response = await fetch(
-      `http://192.168.68.122:6001/api/users/${CommunityId}`,
+      `http://localhost:6001/api/users/${CommunityId}`,
       {
         method: "PATCH",
         mode: "cors",

@@ -64,7 +64,7 @@ function Form() {
     // formData.append("picture", values.picture)
     console.log(formData);
     const savedUserResponse = await fetch(
-      "http://192.168.68.122:6001/api/auth/register",
+      "http://localhost:6001/api/auth/register",
       {
         method: "POST",
         mode: "cors",
@@ -82,7 +82,7 @@ function Form() {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch(
-      "http://192.168.68.122:6001/api/auth/login",
+      "http://localhost:6001/api/auth/login",
       {
         method: "POST",
         mode: "cors",
